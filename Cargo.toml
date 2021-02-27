@@ -1,0 +1,12 @@
+[package]
+name = "ferrite"
+version = "0.1.0"
+authors = ["Mattheus Roxas <mattheusroxas@protonmail.com>"]
+edition = "2018"
+description = "A CLI interface to YouTube written in Rust."
+readme = "README.md"
+
+[dependencies]
+structopt = "0.3"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
