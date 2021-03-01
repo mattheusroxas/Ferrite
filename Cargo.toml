@@ -3,13 +3,13 @@ name = "ferrite"
 version = "0.2.0"
 authors = ["Mattheus Roxas <mattheusroxas@protonmail.com>"]
 edition = "2018"
-description = "A CLI program for YouTube written in Rust."
+description = "A CLI for YouTube written in Rust."
 readme = "README.md"
+license = "Blueoak"
+license-file = "LICENSE.md"
 
 [dependencies]
 structopt = "0.3"
 serde = { version = "1.0", features = ["derive"] }
 toml = "0.5"
 dirs = "3.0"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
