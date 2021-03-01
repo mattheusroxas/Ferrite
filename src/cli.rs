@@ -1,3 +1,4 @@
+use serde::Deserialize;
 use structopt::StructOpt;
 
 // Subcommands
@@ -93,4 +94,12 @@ pub enum Filters {
         about = "Resolutions: best, 2160p, 1440p, 1080p, 720p, 480p, 360p, 240p, 144p, audio."
     )]
     Resolutions,
+}
+
+// Configuration
+#[derive(Debug, Clone, Deserialize)]
+pub struct General {
+    pub api_host: bool,
+    pub auto_captions: bool,
+    pub autoplay: bool,
 }
