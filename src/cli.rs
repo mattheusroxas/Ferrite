@@ -45,14 +45,13 @@ pub enum Videos {
 // Search
 #[derive(Debug, StructOpt)]
 pub enum Search {
-    #[structopt(about = "Search for YouTube videos (default mode)")]
-    Search,
-
+    // #[structopt(about = "Search for YouTube videos (default mode)")]
+    // Search,
     #[structopt(about = "Search for playlists of videos")]
-    SearchPlaylists,
+    Playlists,
 
     #[structopt(about = "Search for YouTube channels")]
-    SearchChannels,
+    Channels,
 }
 
 // Filters
