@@ -1,6 +1,6 @@
 [package]
 name = "ferrite"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Mattheus Roxas <mattheusroxas@protonmail.com>"]
 edition = "2018"
 description = "A CLI for YouTube written in Rust."

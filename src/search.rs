@@ -1,10 +1,13 @@
+use rustyline::{Config, EditMode, Editor};
 use youtube_dl::SearchOptions;
 use youtube_dl::YoutubeDl;
 use youtube_dl::YoutubeDlOutput;
 
 pub fn search() {
-    let mut rl = rustyline::Editor::<()>::new();
-    let readline = rl.readline(">> ");
+    let config = Config::builder().edit_mode(EditMode::Vi).build();
+
+    let mut rl: Editor<()> = Editor::with_config(config);
+    let readline = rl.readline("Search for... ");
     let query = match readline {
         Ok(query) => query,
         Err(_) => {
@@ -14,7 +17,7 @@ pub fn search() {
     };
     let page = 20;
 
-    let search = SearchOptions::youtube(&format!("{}&page={}", query, page)).with_count(25);
+    let search = SearchOptions::youtube(&format!("{}&page={}", query, page)).with_count(5);
 
     let results = YoutubeDl::search_for(&search)
         .run()
