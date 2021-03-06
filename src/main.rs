@@ -1,5 +1,5 @@
 mod search;
 
 fn main() {
-    search::search();
+    search::pager();
 }

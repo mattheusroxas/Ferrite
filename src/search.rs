@@ -5,15 +5,13 @@ use termion::input::TermRead;
 use youtube_dl::{SearchOptions, YoutubeDl, YoutubeDlOutput};
 
 // Input
-pub fn search() {
+fn search(page: u32) {
     let config = Config::builder().edit_mode(EditMode::Vi).build();
     let mut rl: Editor<()> = Editor::with_config(config);
 
     let query = rl.readline("Search for... ").expect("No input");
 
     // Actual searching
-    let mut page = 1;
-
     let search = SearchOptions::youtube(&format!("{}&page={}", query, page)).with_count(5);
 
     let results = YoutubeDl::search_for(&search)
@@ -34,17 +32,19 @@ pub fn search() {
 }
 
 // Select option
-fn pager() {
+pub fn pager() {
     let config = Config::builder().edit_mode(EditMode::Vi).build();
     let mut rl: Editor<()> = Editor::with_config(config);
 
     let _option = rl.readline("Select... ").expect("No input");
 
+    let mut page = 1;
+
     for vibecheck in stdin().keys() {
         match vibecheck {
             Ok(Key::Char('\n')) => {
                 page += 1;
-                search();
+                search(page);
             }
 
             Ok(_) => break,
