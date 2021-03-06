@@ -10,5 +10,4 @@ license = "LICENSE.md"
 [dependencies]
 rustyline = "7.1.0"
 youtube_dl = "0.6.0"
-num = "0.4.0"
 termion = "1.5.6"

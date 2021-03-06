@@ -1,17 +1,14 @@
-use num::One;
 use rustyline::{Config, EditMode, Editor};
-use std::ops::Add;
-use youtube_dl::{SearchOptions, YoutubeDl, YoutubeDlOutput};
-extern crate num;
 use std::io::{stdin, ErrorKind};
 use termion::event::Key;
 use termion::input::TermRead;
+use youtube_dl::{SearchOptions, YoutubeDl, YoutubeDlOutput};
 
 // Input
 pub fn search() {
     let config = Config::builder().edit_mode(EditMode::Vi).build();
-
     let mut rl: Editor<()> = Editor::with_config(config);
+
     let query = rl.readline("Search for... ").expect("No input");
 
     // Actual searching
@@ -34,20 +31,25 @@ pub fn search() {
         .collect::<Vec<_>>();
 
     println!("{}", titles.join("\n")); // TODO use more efficent method, https://stackoverflow.com/a/56037073
+}
 
-    // Select option
+// Select option
+fn pager() {
+    let config = Config::builder().edit_mode(EditMode::Vi).build();
+    let mut rl: Editor<()> = Editor::with_config(config);
+
     let _option = rl.readline("Select... ").expect("No input");
-    let stdin = stdin();
-    for vibecheck in stdin.keys() {
+
+    for vibecheck in stdin().keys() {
         match vibecheck {
-            Ok(Key::Char('\n')) => inc(&mut page),
-            Ok(_) => {}
+            Ok(Key::Char('\n')) => {
+                page += 1;
+                search();
+            }
+
+            Ok(_) => break,
             Err(e) if e.kind() == ErrorKind::Interrupted => continue,
             Err(e) => panic!("oh no {:?}", e),
         }
     }
-}
-
-pub fn inc<T: Copy + One + Add<T, Output = T>>(x: &mut T) {
-    *x = *x + T::one();
 }
