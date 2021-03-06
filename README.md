@@ -5,7 +5,8 @@ A CLI program for YouTube written in Rust.
 I was inspired by youtube-viewer, and it's many forks, to adapt the idea of a YouTube CLI. Since I use `pipe-viewer` so regularly I thought it would be nice to make my own spin on it and even improve on it in some areas.
 
 ## Supported platforms
-This program will literally run on anything with a terminal.
+This program will literally run on anything with a terminal; tested on:
+* Linux
 
 ## Dependencies
 * cargo
@@ -17,13 +18,12 @@ Install WSL using the following link. After you've done that just follow all the
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 ## How to get cargo
-First install `rustup`
+First install `rustup`. If you already have a package manager you can use that instead.
+This link should get you sorted: https://www.rust-lang.org/tools/install
+
+Now you're all done! If you're a chad you'll install nightly ;)
 ```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-Then actually get `cargo` (If you're a cool kid you'll swap out `stable` with `nightly`)
-```
-rustup install stable
+rustup install nightly
 ```
 
 ## Installation
