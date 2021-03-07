@@ -39,6 +39,10 @@ pub fn search() {
         match vibecheck {
             Ok(Key::Char('\n')) => {
                 page += 1;
+
+                let search =
+                    SearchOptions::youtube(&format!("{}&page={}", query, page)).with_count(5);
+
                 let results = YoutubeDl::search_for(&search)
                     .run()
                     .expect("Failed to run query");
