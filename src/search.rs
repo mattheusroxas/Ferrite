@@ -1,7 +1,8 @@
 use rustyline::{Config, EditMode, Editor};
-use std::io::{stdin, ErrorKind};
+use std::io::{stdin, stdout, Write};
 use termion::event::Key;
 use termion::input::TermRead;
+use termion::raw::IntoRawMode;
 use youtube_dl::{SearchOptions, YoutubeDl, YoutubeDlOutput};
 
 // Input
@@ -34,10 +35,19 @@ pub fn search() {
 
     // Select option
     let _option = rl.readline("Select... ").expect("No input");
-
+    let mut stdout = stdout().into_raw_mode().unwrap();
     for vibecheck in stdin().keys() {
-        match vibecheck {
-            Ok(Key::Char('\n')) => {
+        // Clear the *entire* screen before printing the below results
+        write!(
+            stdout,
+            "{}{}",
+            termion::cursor::Goto(1, 1),
+            termion::clear::All,
+        )
+        .unwrap();
+
+        match vibecheck.unwrap() {
+            Key::Char('\n') => {
                 page += 1;
 
                 let search =
@@ -57,12 +67,10 @@ pub fn search() {
                     .map(|video| video.title.as_str())
                     .collect::<Vec<_>>();
 
-                println!("{}", titles.join("\n")); // TODO use more efficent method, https://stackoverflow.com/a/56037073
+                write!(stdout, "{}", titles.join("\n")).unwrap(); // TODO use more efficent method, https://stackoverflow.com/a/56037073
             }
 
-            Ok(_) => break,
-            Err(e) if e.kind() == ErrorKind::Interrupted => continue,
-            Err(e) => panic!("oh no {:?}", e),
+            _ => break,
         }
     }
 }
